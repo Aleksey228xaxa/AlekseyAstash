@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Year</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/JS/main.js"></script>
+    <script>
+        function showDayOfMonth() {
+            var currentDate = new Date();
+            var dayOfMonth = currentDate.getDate();
+            alert('Номер текущего дня в месяце: ' + dayOfMonth);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Show Day</h1>
+        <button onclick="showDayOfMonth()">Показать день</button>
+    </div>
+    <div class="container">
+        <input type="text" id="fullNameInput" placeholder="Введите ФИО">
+        <button onclick="showName7Times()">Показать ФИО 7 раз</button>
+    </div>
+    <script>
+        function showName7Times() {
+            var fullName = document.getElementById('fullNameInput').value;
+            for (var i = 0; i < 7; i++) {
+                document.write(fullName + "<br>");
+            }
+        }
+    </script>
+    <button onclick="generateArray()">Показать массив</button>
+    <div id="results"></div>
+    <h1>Результат вычислений:</h1>
+    <p id="result"></p>
+    <input type="text" id="nameInput" placeholder="ИМЯ">
+    <br>
+    <input type="text" id="hobbyInput" placeholder="Увлечение">
+    <br>
+    <button onclick="getLength()">Определить длину строки ИМЯ</button>
+    <button onclick="addSpaces()">Добавить пробелы в Увлечение</button>
+    <button onclick="replaceName()">Заменить Имя на Павел</button>
+    <script>
+        function getLength() {
+            const name = document.getElementById("nameInput").value;
+            alert(`Длина строки ИМЯ: ${name.length}`);
+        }
+
+        function addSpaces() {
+            const hobby = document.getElementById("hobbyInput");
+            hobby.value = hobby.value.split("").join(" ");
+        }
+
+        function replaceName() {
+            const name = document.getElementById("nameInput");
+            name.value = "Павел";
+        }
+    </script>
+    <script>
+        function generateArray() {
+            var randomArray = [];
+            var sumOfPositives = 0;
+
+            for (var i = 0; i < 5; i++) {
+                randomArray.push(Math.floor(Math.random() * 100 - 50)); // Генерация случайного числа от -50 до 49
+                if (randomArray[i] > 0) {
+                    sumOfPositives += randomArray[i];
+                }
+            }
+
+            var sortedArray = randomArray.slice().sort((a, b) => a - b);
+
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<p>Исходный массив: " + randomArray.join(", ") + "</p>";
+            resultsDiv.innerHTML += "<p>Сумма положительных элементов: " + sumOfPositives + "</p>";
+            resultsDiv.innerHTML += "<p>Отсортированный массив: " + sortedArray.join(", ") + "</p>";
+        }
+    </script>
+</body>
+</html>
