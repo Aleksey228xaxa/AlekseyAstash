@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Script Injection</title>
+    <script defer src="assets/JS/main.js"></script>
+    <style>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            button:active {
+                transform: scale(0.95);
+            }
+    </style>
+</head>
+<body>
+    <script>
+        alert("Hello, World!");
+        var result = confirm("Нажмите 'OK' для подтверждения или 'Отмена' для отклонения");
+        if (result) {
+            alert("Подтверждено");
+        } else {
+            alert("Отклонено");
+        }
+        var name = prompt("Введите ваше имя", "Гость");
+        if (name != null) {
+            alert("Привет, " + name);
+        } else {
+            alert("Вы не ввели имя");
+        }
+
+    </script>
+    <form id="myForm">
+        <input type="text" id="textField" name="textField" placeholder="Введите текст">
+        <button type="submit" id="submitButton">Отправить</button>
+    </form>
+    <a href="https://www.google.com/" onclick="alert('Внимание!')">Кликни здесь</a>
+    <button onclick="executeOperators()">Выполнить операторы</button>
+    <div id="results"></div>
+    <img src="image.jpg" onerror="alert('Image loading failed!')">
+</body>
+</html>
