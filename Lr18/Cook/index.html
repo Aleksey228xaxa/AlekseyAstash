@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личные данные и работа с Cookie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .personal-data {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #cookieData {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="personal-data">
+        <h2>Введите ваши личные данные</h2>
+        <form id="personalDataForm" onsubmit="saveDataToCookies(); return false;">
+            <label for="fullName">ФИО:</label>
+            <input type="text" id="fullName" required>
+
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" required>
+
+            <label for="birthDate">Дата рождения:</label>
+            <input type="date" id="birthDate" required>
+
+            <label for="birthPlace">Место рождения:</label>
+            <input type="text" id="birthPlace" required>
+
+            <label for="hobbies">Увлечения:</label>
+            <textarea id="hobbies" rows="3"></textarea>
+
+            <button type="submit">Сохранить в Cookie</button>
+        </form>
+
+        <button onclick="getDataFromCookies()">Получить данные из Cookie</button>
+        <button onclick="clearCookies()">Очистить Cookie</button>
+
+        <div id="cookieData"></div>
+    </div>
+
+    <script>
+        // Функция для сохранения данных в Cookie
+        function saveDataToCookies() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const birthPlace = document.getElementById('birthPlace').value;
+            const hobbies = document.getElementById('hobbies').value;
+
+            // Сохранение данных в Cookie с указанием пути и времени жизни Cookie
+            document.cookie = `fullName=${encodeURIComponent(fullName)}; max-age=3600; path=/`;
+            document.cookie = `email=${encodeURIComponent(email)}; max-age=3600; path=/`;
+            document.cookie = `birthDate=${encodeURIComponent(birthDate)}; max-age=3600; path=/`;
+            document.cookie = `birthPlace=${encodeURIComponent(birthPlace)}; max-age=3600; path=/`;
+            document.cookie = `hobbies=${encodeURIComponent(hobbies)}; max-age=3600; path=/`;
+
+            alert("Данные успешно сохранены в Cookie.");
+        }
+
+        // Функция для получения данных из Cookie
+        function getDataFromCookies() {
+            const cookies = document.cookie.split('; ');
+            let cookieData = '';
+
+            cookies.forEach(cookie => {
+                const [name, value] = cookie.split('=');
+                if (value) {
+                    cookieData += `<p><strong>${name}:</strong> ${decodeURIComponent(value)}</p>`;
+                }
+            });
+
+            document.getElementById('cookieData').innerHTML = cookieData || 'Нет данных в Cookie.';
+        }
+
+        // Функция для очистки Cookie
+        function clearCookies() {
+            const cookies = document.cookie.split('; ');
+
+            cookies.forEach(cookie => {
+                const name = cookie.split('=')[0];
+                document.cookie = `${name}=; max-age=0; path=/`;
+            });
+
+            document.getElementById('cookieData').innerHTML = 'Cookie очищены.';
+            alert("Все Cookie удалены.");
+        }
+
+        // Для отладки: выводим все Cookie в консоль
+        console.log(document.cookie);
+    </script>
+</body>
+</html>

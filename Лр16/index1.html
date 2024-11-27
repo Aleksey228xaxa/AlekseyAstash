@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Собери монеты - Браузерная игра</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #gameArea {
+            width: 600px;
+            height: 400px;
+            border: 2px solid black;
+            margin: 20px auto;
+            position: relative;
+            background-color: #f0f0f0;
+        }
+
+        .character {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .item {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background-color: gold;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Собери монеты</h1>
+    <p>Используйте клавиши стрелок для перемещения персонажа.</p>
+    <p id="score">Счёт: 0</p>
+
+    <div id="gameArea">
+        <!-- Игровое поле -->
+    </div>
+
+    <script>
+        // Базовый класс Character (инкапсуляция и наследование)
+        class Character {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.element = document.createElement('div');
+                this.element.className = 'character';
+                this.updatePosition();
+                document.getElementById('gameArea').appendChild(this.element);
+            }
+
+            // Метод для обновления позиции персонажа
+            updatePosition() {
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+            }
+
+            // Перемещение персонажа с проверкой границ поля
+            move(dx, dy) {
+                const gameArea = document.getElementById('gameArea');
+                const maxX = gameArea.clientWidth - 40; // Ширина игрового поля минус ширина персонажа
+                const maxY = gameArea.clientHeight - 40; // Высота игрового поля минус высота персонажа
+
+                this.x = Math.max(0, Math.min(this.x + dx, maxX));
+                this.y = Math.max(0, Math.min(this.y + dy, maxY));
+                this.updatePosition();
+            }
+
+            // Метод для столкновения с предметом (полиморфизм)
+            collideWith(item) {
+                return (this.x < item.x + item.size &&
+                    this.x + 40 > item.x &&
+                    this.y < item.y + item.size &&
+                    this.y + 40 > item.y);
+            }
+        }
+
+        // Класс Player, наследующий от Character
+        class Player extends Character {
+            constructor(x, y) {
+                super(x, y); // Вызов конструктора базового класса
+                this.score = 0;
+            }
+
+            // Публичный метод для увеличения счёта
+            increaseScore() {
+                this.score += 10;
+                document.getElementById('score').innerText = `Счёт: ${this.score}`;
+            }
+        }
+
+        // Базовый класс Item (инкапсуляция и наследование)
+        class Item {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = 20;
+                this.element = document.createElement('div');
+                this.element.className = 'item';
+                this.updatePosition();
+                document.getElementById('gameArea').appendChild(this.element);
+            }
+
+            // Метод для обновления позиции предмета
+            updatePosition() {
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+            }
+
+            // Метод для удаления предмета
+            remove() {
+                this.element.remove();
+            }
+        }
+
+        // Класс Coin, наследующий от Item (полиморфизм)
+        class Coin extends Item {
+            constructor(x, y) {
+                super(x, y);
+            }
+        }
+
+        // Функция для генерации случайного числа в пределах от min до max
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Функция для создания случайных предметов
+        function generateItems(numItems) {
+            const items = [];
+            const gameArea = document.getElementById('gameArea');
+
+            for (let i = 0; i < numItems; i++) {
+                const x = getRandomInt(0, gameArea.clientWidth - 20);
+                const y = getRandomInt(0, gameArea.clientHeight - 20);
+                items.push(new Coin(x, y));
+            }
+
+            return items;
+        }
+
+        // Создание персонажа игрока
+        const player = new Player(100, 100);
+
+        // Создание начальных предметов (монет)
+        let items = generateItems(3);
+
+        // Обработчик нажатий клавиш для перемещения игрока
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    player.move(0, -10);
+                    break;
+                case 'ArrowDown':
+                    player.move(0, 10);
+                    break;
+                case 'ArrowLeft':
+                    player.move(-10, 0);
+                    break;
+                case 'ArrowRight':
+                    player.move(10, 0);
+                    break;
+            }
+
+            // Проверка на столкновение с предметами
+            items.forEach((item, index) => {
+                if (player.collideWith(item)) {
+                    player.increaseScore();
+                    item.remove();
+                    items.splice(index, 1); // Удаление собранного предмета из массива
+                }
+            });
+
+            // Если все предметы собраны, генерировать новые
+            if (items.length === 0) {
+                items = generateItems(3); // Генерация 3 новых предметов
+            }
+        });
+    </script>
+
+</body>
+</html>

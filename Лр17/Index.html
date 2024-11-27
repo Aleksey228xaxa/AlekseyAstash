@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры работы с событиями</title>
+    <style>
+        body * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- Пример 1: Использование атрибута HTML -->
+    <input value="Нажми меня (Пример 1)" onclick="alert('Клик!')" type="button">
+
+    <!-- Пример 2: Использование функции -->
+    <input type="button" onclick="countRabbits()" value="Считать кроликов (Пример 2)">
+
+    <!-- Пример 3: Использование свойства DOM-объекта -->
+    <input id="elem3" type="button" value="Нажми меня (Пример 3)">
+
+    <!-- Пример 4: Доступ к элементу через this -->
+    <button onclick="alert(this.innerHTML)">Нажми меня (Пример 4)</button>
+
+    <!-- Пример 5: Метод addEventListener -->
+    <input id="elem5" type="button" value="Нажми меня (Пример 5)">
+
+    <!-- Пример 6: Удаление обработчика -->
+    <input id="elem6" type="button" value="Нажми и потом обработчик исчезнет (Пример 6)">
+
+    <!-- Пример 7: Всплытие -->
+    <form onclick="alert('form')">
+        FORM
+        <div onclick="alert('div')">
+            DIV
+            <p onclick="alert('p')">P (Пример 7)</p>
+        </div>
+    </form>
+
+    <!-- Пример 8: Прекращение всплытия -->
+    <body onclick="alert('сюда всплытие не дойдёт (Пример 8)')">
+        <button onclick="event.stopPropagation()">Кликни меня (Пример 8)</button>
+    </body>
+
+    <script>// Пример 2: Функция для подсчёта кроликов
+        function countRabbits() {
+            for (let i = 1; i <= 3; i++) {
+                alert("Кролик номер " + i);
+            }
+        }
+
+        // Пример 3: Назначение обработчика через свойство DOM-объекта
+        const elem3 = document.getElementById('elem3');
+        elem3.onclick = function() {
+            alert('Спасибо! (Пример 3)');
+        };
+
+        // Пример 5: addEventListener
+        const elem5 = document.getElementById('elem5');
+        function handler1() {
+            alert('Спасибо! (Пример 5, Обработчик 1)');
+        }
+        function handler2() {
+            alert('Спасибо ещё раз! (Пример 5, Обработчик 2)');
+        }
+        elem5.onclick = () => alert("Привет (Пример 5, Обработчик через свойство)");
+        elem5.addEventListener("click", handler1); // Спасибо!
+        elem5.addEventListener("click", handler2); // Спасибо ещё раз!
+
+        // Пример 6: Удаление обработчика
+        const elem6 = document.getElementById('elem6');
+        function handler() {
+            alert('Спасибо! (Пример 6)');
+        }
+        elem6.addEventListener("click", handler);
+        elem6.addEventListener("click", function() {
+            elem6.removeEventListener("click", handler);
+            alert("Обработчик удалён (Пример 6)");
+        });</script>
+</body>
+</html>

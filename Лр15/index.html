@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстрация ООП в JavaScript</title>
+</head>
+<body>
+    <h1>Введите информацию о вашем автомобиле</h1>
+
+    <form id="carForm">
+        <label for="make">Марка:</label>
+        <input type="text" id="make" required><br><br>
+
+        <label for="model">Модель:</label>
+        <input type="text" id="model" required><br><br>
+
+        <label for="year">Год выпуска:</label>
+        <input type="number" id="year" required><br><br>
+
+        <label for="fuelType">Тип топлива:</label>
+        <input type="text" id="fuelType" required><br><br>
+
+        <button type="button" onclick="createCar()">Создать автомобиль</button>
+    </form>
+
+    <h2>Информация о вашем автомобиле:</h2>
+    <p id="output"></p>
+
+    <script>
+        // Базовый класс Vehicle (инкапсуляция и наследование)
+        class Vehicle {
+            #vin; // Приватное поле (инкапсуляция)
+
+            constructor(make, model, year) {
+                this.make = make; // Публичное поле
+                this.model = model; // Публичное поле
+                this._year = year; // "Защищенное" поле (соглашение)
+                this.#vin = Vehicle.generateVin(); // Приватное поле
+            }
+
+            // Публичный метод
+            displayInfo() {
+                return `Транспортное средство: ${this.make} ${this.model}, ${this._year} года выпуска.`;
+            }
+
+            // Приватный метод для расчета возраста автомобиля
+            #calculateAge() {
+                const currentYear = new Date().getFullYear();
+                return currentYear - this._year;
+            }
+
+            // Публичный метод для получения возраста автомобиля через приватный метод
+            getAge() {
+                return `Возраст: ${this.#calculateAge()} лет.`;
+            }
+
+            // Геттер и сеттер для защищённого поля _year
+            get year() {
+                return this._year;
+            }
+
+            set year(newYear) {
+                if (newYear > 1885 && newYear <= new Date().getFullYear()) {
+                    this._year = newYear;
+                } else {
+                    console.log('Некорректный год.');
+                }
+            }
+
+            // Статический метод для генерации VIN
+            static generateVin() {
+                return Math.floor(Math.random() * 1000000000).toString(); // Генерация случайного VIN
+            }
+
+            // Статическое поле
+            static vehicleCount = 0;
+        }
+
+        // Производный класс Car, который наследует от Vehicle (наследование и полиморфизм)
+        class Car extends Vehicle {
+            constructor(make, model, year, fuelType) {
+                super(make, model, year); // Вызов конструктора базового класса
+                this.fuelType = fuelType; // Публичное поле
+                Vehicle.vehicleCount++; // Увеличение счетчика транспортных средств
+            }
+
+            // Полиморфный метод
+            displayInfo() {
+                return `${super.displayInfo()} Тип топлива: ${this.fuelType}.`;
+            }
+        }
+
+        // Функция для создания объекта Car и отображения информации
+        function createCar() {
+            const make = document.getElementById('make').value;
+            const model = document.getElementById('model').value;
+            const year = parseInt(document.getElementById('year').value);
+            const fuelType = document.getElementById('fuelType').value;
+
+            // Создание объекта класса Car
+            const myCar = new Car(make, model, year, fuelType);
+
+            // Отображение информации о созданном автомобиле
+            const outputElement = document.getElementById('output');
+            outputElement.innerHTML = myCar.displayInfo() +
+                `<br>${myCar.getAge()}<br>VIN: ${myCar.constructor.generateVin()}<br>Всего транспортных средств: ${Car.vehicleCount}`;
+        }
+    </script>
+</body>
+</html>

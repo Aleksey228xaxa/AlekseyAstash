@@ -1,0 +1,705 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <link rel="stylesheet" href="assets/CSS/style1.css">
+    <link rel="stylesheet" href="assets/CSS/style2.css">
+    <link rel="stylesheet" href="assets/CSS/style3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Сайт Гремячинский ДОК</title>
+    <script defer src="assets/JS/main.js" charset="windows-1251"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <script>
+        const touchArea = document.getElementById('touchArea');
+
+        touchArea.addEventListener('touchstart', function (event) {
+            console.log('Сенсорное нажатие!');
+            console.log('Координаты касания:', event.touches[0].clientX, event.touches[0].clientY);
+            touchArea.textContent = 'Нажатие!';
+        });
+
+        touchArea.addEventListener('touchmove', function (event) {
+            console.log('Сенсорное перемещение!');
+            console.log('Координаты перемещения:', event.touches[0].clientX, event.touches[0].clientY);
+            touchArea.textContent = 'Перемещение!';
+        });
+
+        touchArea.addEventListener('touchend', function (event) {
+            console.log('Сенсорное окончание!');
+            touchArea.textContent = 'Окончание!';
+        });
+
+        touchArea.addEventListener('touchcancel', function (event) {
+            console.log('Сенсорное касание отменено!');
+            touchArea.textContent = 'Отменено!';
+        });
+        document.addEventListener('keydown', function (event) {
+            // Проверяем, что нажаты клавиши Shift и S
+            if (event.shiftKey && (event.key === 's' || event.key === 'S')) {
+                event.preventDefault(); // Останавливаем стандартное поведение
+
+                // Выполняем действие — показываем сообщение
+                alert('Комбинация Shift + S нажата!');
+            }
+        });
+        window.addEventListener('scroll', function () {
+            console.log('Прокрутка страницы!');
+            console.log('Текущая позиция прокрутки:', window.scrollY);
+        });
+
+        // События сенсорных экранов
+        document.addEventListener('touchstart', function (event) {
+            console.log('Сенсорное нажатие!', event.touches);
+        });
+
+        document.addEventListener('touchmove', function (event) {
+            console.log('Сенсорное перемещение!', event.touches);
+        });
+
+        document.addEventListener('touchend', function (event) {
+            console.log('Сенсорное окончание!');
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Отменяем стандартное поведение
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth' // Плавная прокрутка
+                });
+            });
+        });
+    </script>
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Вернуться наверх">↑</button>
+    <header>
+        <div class="logotipe">
+            <div class="logo"><img src="assets/images/Logo.png" alt="Логотип" id="logo"></div>
+        </div>
+        <div class="menu">
+            <a class="menu_link" href="#">Продукция</a>
+            <a class="menu_link" href="#">Поставщикам</a>
+            <a class="menu_link" href="#" onmouseover="showVacancies()">Вакансии</a>
+            <div class="vacancies-list" onmouseleave="hideVacancies()">
+                <ul>
+                    <li>Лесовоз</li>
+                    <li>Лесонавоз</li>
+                    <li>Лесоосеоходроз</li>
+                </ul>
+            </div>
+            <a class="menu_link" href="#">Новости</a>
+            <a class="menu_link" href="#">Контакты</a>
+        </div>
+        <div class="phone"><img src="assets/images/phone.png" alt="Телефон">+7 (342) 250-08-88</div>
+        <div class="email"><img src="assets/images/gmail.png" alt="Email"> example@gmail.com</div>
+        <div class="language"><span class="green">▼</span>RU</div>
+    </header>
+    <section class="main">
+        <div class="sectionOne">
+            <pre class="title">ГРУППА КОМПАНИЙ
+ГРЕМЯЧИНСКИЙ ДОК
+</pre>
+            <pre class="titletext">Современное предприятие по производству гнуто-клееных изделий 
+(латофлекс), фанеры, топливных брикетов RUF, березового угля, 
+пиломатериалов</pre>
+            <button class="button" onclick="addComment()">Связаться с нами</button>
+            <img class="WhatsAPP" src="assets/images/WhatsApp.png" alt="WhatsAPP">
+        </div>
+    </section>
+    <section class="section_products">
+        <div class="backgreey">
+            <div class="Title_product">ПРОДУКЦИЯ ЗАВОДА</div>
+            <div class="Text_product">
+                <pre>
+Ниже представлен список нашей продукции. Получить
+дополнительную информацию, а также оставить заявку можно
+по контактам коммерческой службы.
+</pre>
+            </div>
+            <div class="products">
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">ЛАТОФЛЕКС</h3></div>
+                    <div class="product_text">
+                        Шпон березовый лущеный, <br /> ГОСТ 99-96В Смола марки КФМТ - 15,<br /> класс эмиссии Е0
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk1.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">ФАНЕРА</h3></div>
+                    <div class="product_text">
+                        Шпон березовый лущеный, <br /> ГОСТ 99-96В Смола марки КФМТ - 15,<br /> класс эмиссии Е0
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk2.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">БРИКЕТЫ ТОПЛИВНЫЕ RUF</h3></div>
+                    <div class="product_text">
+                        Прессованные березовые опилки<br />
+                        без применения химических добавок<br />
+                        <br />
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+            </div>
+            <div class="products">
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk3.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">ПИЛОМАТЕРИАЛЫ</h3></div>
+                    <div class="product_text">
+                        Дисковый распил - ель сибирская,<br />
+                        пихта, сосна, берёза, липа, осина
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk4.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">КРОВАТНЫЕ ОСНОВАНИЯ</h3></div>
+                    <div class="product_text">
+                        Из берёзового шпона или из массива <br />
+                        на ленте
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk5.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">УГОЛЬ</h3></div>
+                    <div class="product_text">
+                        Микропористый <br />
+                        высокоуглеродистый продукт
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+            </div>
+            <div class="products">
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk6.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">САЖЕНЦЫ</h3></div>
+                    <div class="product_text">
+                        Молодые деревья выращенные<br />
+                        в питомнике
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+                <div class="product_groop">
+                    <div><img class="product_image" src="assets/images/unsplash_Xp9hn1HzzDk7.png" alt="WhatsAPP"></div>
+                    <div><h3 class="products_name">ОТХОДЫ ПРОИЗВОДСТВА</h3></div>
+                    <div class="product_text">
+                        Прессованные березовые опилки <br />
+                        без применения химических добавок
+                    </div>
+                    <div><button class="product_button">Подробнее о товаре</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="center">
+        <div class="center_container">
+            <div class="title_center">ОСНОВНАЯ ДЕЯТЕЛЬНОСТЬ</div>
+            <div class="center_block_one">
+                <div class="center_block_one_titile">
+                    ПРОИЗВОДСТВО
+                </div>
+                <div class="center_block_one_text">
+                    Оборудование предприятия поставляется<br />
+                    от мировых лидеров в сфере деревообработки<br />
+                    и обеспечивает стабильный выпуск продукции.<br />
+                    <br />
+                    Поставки осуществляются по России и в 14<br />
+                    стран мира. Строгий контроль на каждом этапе<br />
+                    производства помогает поддерживать<br />
+                    качество продукции.
+                </div>
+                <div class="center_block_one_img"><img id="fullScreenImg" class="img_size" src="assets/images/1.jpg" alt="gov" /></div>
+            </div>
+            <div class="center_block_two">
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/2.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/3.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/4.jpg" alt="gov" /></div>
+            </div>
+        </div>
+        <div class="center_container">
+            <div class="title_center"><br /><br /></div>
+            <div class="center_block_one">
+                <pre class="center_block_two_titile">
+ЛЕСОУПРАВЛЕНИЕ 
+И ЗАГОТОВКА
+                </pre>
+                <div class="center_block_one_text">
+                    Рубка леса осуществляется на арендованных<br />
+                    участках, обеспечивая бесперебойную<br />
+                    поставку сырья для производства и для<br />
+                    продажи. Расчетная лесосека – 320 000 м3.<br />
+                    Общая площадь арендованного леса – 306<br />
+                    000 Га - cертифицирована по стандартам<br />
+                    международной добровольной лесной<br />
+                    сертификации (FSC).
+                </div>
+                <div class="center_block_one_img"><img id="fullScreenImg" class="img_size" src="assets/images/1.jpg" alt="gov" /></div>
+            </div>
+            <div class="center_block_two">
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/2.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/3.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/4.jpg" alt="gov" /></div>
+            </div>
+        </div>
+        <div class="center_container">
+            <div class="title_center"><br /><br /><br /></div>
+            <div class="center_block_one">
+                <div class="center_block_one_titile">
+                    ПИТОМНИК
+                </div>
+                <div class="center_block_one_text">
+                    <br />
+                    Задача лесопитомника – обеспечение<br />
+                    посадочным материалом собственной<br />
+                    и сторонней лесозаготовки.<br />
+                    <br />
+                    Питомник полностью покрывает потребности<br />
+                    Пермского края в сеянцах сибирской ели.<br />
+                    Общая площадь теплиц – 4800 м3, питомника –<br />
+                    15 Га. Потенциал – до 4 млн. сеянцев в год.<br />
+                </div>
+                <div class="center_block_one_img"><img id="fullScreenImg" class="img_size" src="assets/images/1.jpg" alt="gov" /></div>
+            </div>
+            <div class="center_block_two">
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/2.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/3.jpg" alt="gov" /></div>
+                <div class="center_block_two_img"><img id="fullScreenImg" class="two_img" src="assets/images/4.jpg" alt="gov" /></div>
+            </div>
+        </div>
+    </section>
+    <section class="certificate">
+        <div class="certificate_inner">
+            <div class="certificate_left">
+                <div class="certificate_title">
+                    СТАБИЛЬНОСТЬ<br />
+                    ПОСТАВКИ ЗА СЧЕТ<br />
+                    СОБСТВЕННОЙ<br />
+                    ЛЕСОЗАГОТОВКИ<br />
+                </div>
+                <div class="img_label">
+                    <div class="img_video"><img class="img_vidos" src="assets/images/video.png" alt="gov" /></div>
+                    <div class="label_vid">СМОТРЕТЬ ВИДЕО О ЗАВОДЕ</div>
+                </div>
+                <div class="certificate_right_text">
+                    Гибкий подход к условиям<br />
+                    сотрудничества – скидки, различные<br />
+                    формы оплаты, условия поставки..
+                </div>
+            </div>
+            <div class="certificate_right">
+                <div class="fon_right">
+                    <div class="text_block_right">
+                        <div class="certificate_right_title">
+                            Сертификат FSC
+                        </div>
+                        <div class="right_text">
+                            Сертифицированная продукция (FSC 100%)<br />
+                            по системе Forest Stewardship Council®.
+                        </div>
+                        <div class="certificate_right_title">
+                            Соответствие регламенту EUTR
+                        </div>
+                        <div class="right_text">
+                            (European Union Timber Regulation) – <br />
+                            предоставляем необходимый пакт документов.
+                        </div>
+                        <div class="certificate_right_title">
+                            Сертификат CARB / CARB2
+                        </div>
+                        <div class="right_text">
+                            Для поставок в США и другие страны,<br />
+                            запрашивающие сертификацию на соответствие<br />
+                            производства и продукции стандартам по выбросам<br />
+                            формальдегида.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section_card">
+        <div class="card_header">
+            <div class="card_title">
+                ГЕОГРАФИЯ ПОСТАВОК
+            </div>
+            <div class="Card_block">
+                <div class="card_picture_text">
+                    Доставляем грузы по всему<br />
+                    миру в Европу, Азию, Америку,<br />
+                    Египет
+                </div>
+                <div class="picture_box_one">
+                    <div class="card_picture_line"><img class="card_img_line" src="assets/images/line.png" alt="gov" /></div>
+                    <div class="card_picture_line"><img class="card_img_line" src="assets/images/line.png" alt="gov" /></div>
+                    <div class="card_picture_line"><img class="card_img_line" src="assets/images/line.png" alt="gov" /></div>
+                </div>
+                <div class="picture_box_two">
+                    <div class="card_picture_img"><img class="card_img_picture" src="assets/images/picture.png" alt="gov" /></div>
+                    <div class="card_picture_img"><img class="card_img_picture" src="assets/images/picture2.png" alt="gov" /></div>
+                    <div class="card_picture_img"><img class="card_img_picture" src="assets/images/picture3.png" alt="gov" /></div>
+                </div>
+            </div>
+        </div>
+        <div class="card_footer">
+            <div class="Card"><img class="card_img" src="assets/images/card.png" alt="gov" /></div>
+        </div>
+    </section>
+    <section class="cooperation">
+        <div class="cooperation_inner">
+            <div class="cooperation_title">СОТРУДНИЧЕСТВО</div>
+            <div class="cooperation_text">
+                Предприятие постоянно потребляет различный<br />
+                ассортимент продуктов и услуг
+            </div>
+            <div><button class="cooperation_button">Подробнее</button></div>
+        </div>
+    </section>
+    <section class="vacancies">
+        <div class="vacancies_block_one">
+            <div class="vacancies_title">
+                АКТУАЛЬНЫЕ ВАКАНСИИ
+            </div>
+            <div class="sliderTop">
+                <div class=""><img class="arrow_slider" src="assets/images/left-arrow.png" id="left-arrow" alt="gov" /></div>
+                <div class=""><img class="arrow_slider" src="assets/images/right-arrow.png" id="right-arrow" alt="gov" /></div>
+            </div>
+        </div>
+        <div class="block_slider">
+            <hr class="Bigline" />
+            <div class="blocc">
+                <div class="slider">
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ ЛЕСОВОЗА</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 50 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ НАВОЗА</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 510 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ ОПИЛОК</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 520 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ МОЙ</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 50 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ ЛЕСОВОЗА</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 50 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ ЛЕСОВОЗА</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 50 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vacancies_block">
+                        <div class="vacancies_block_title">ВОДИТЕЛЬ ЛЕСОЧТО</div>
+                        <hr class="Blockline" />
+                        <div class="dawda">
+                            <div class="green_text">З.п. от 50 000 ₽</div>
+                            <div class="vacancies_block_text">
+                                Оборудование предприятия<br />
+                                поставляется от мировых лидеров в<br />
+                                сфере деревообработки и обеспечивает<br />
+                                стабильный выпуск продукции, которая<br />
+                                поставляется в 8 регионов России и 14<br />
+                                стран мира.
+                            </div>
+                            <div class="vacancies_block_footer">
+                                <div class="vacancies_block_footer_text">
+                                    Подробнее
+                                </div>
+                                <div class="vacancies_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="news">
+        <div class="vacancies_block_one">
+            <div class="vacancies_title">
+                НОВОСТИ
+            </div>
+            <div class="news_slider">
+                <div class="news_arrow"><img class="arrow" src="assets/images/arrow.png" alt="gov" /></div>
+                <div class="news_title">Читать все новости</div>
+            </div>
+        </div>
+        <div class="news_block_slider">
+            <div class="news_block">
+                <div class="news_img"><img class="news" src="assets/images/news.png" alt="gov" /></div>
+                <div class="news_block_title">Вышли на международный рынок</div>
+                <div class="news_block_text">
+                    Оборудование предприятия поставляется<br />
+                    от мировых лидеров в сфере деревообработки<br />
+                    и обеспечивает стабильный выпуск продукции
+                </div>
+                <div class="news_footer">
+                    25.12.2021
+                </div>
+            </div>
+            <div class="news_block">
+                <div class="news_img"><img class="news" src="assets/images/news.png" alt="gov" /></div>
+                <div class="news_block_title">Вышли на международный рынок</div>
+                <div class="news_block_text">
+                    Оборудование предприятия поставляется<br />
+                    от мировых лидеров в сфере деревообработки<br />
+                    и обеспечивает стабильный выпуск продукции
+                </div>
+                <div class="news_footer">
+                    25.12.2021
+                </div>
+            </div>
+            <div class="news_block">
+                <div class="news_img"><img class="news" src="assets/images/news.png" alt="gov" /></div>
+                <div class="news_block_title">Вышли на международный рынок</div>
+                <div class="news_block_text">
+                    Оборудование предприятия поставляется<br />
+                    от мировых лидеров в сфере деревообработки<br />
+                    и обеспечивает стабильный выпуск продукции
+                </div>
+                <div class="news_footer">
+                    25.12.2021
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="sectionform">
+        <div class="form_right_block">
+            <div class="form_title">
+                СВЯЖИТЕСЬ С НАШИМ<br />
+                СПЕЦИАЛИСТОМ
+            </div>
+            <div class="form_text">
+                Заинтерисованы в сотрудничестве  или остались вопросы?<br />
+                Заполните форму обратной связи и наши менеджеры<br />
+                обязательно свяжутся с вами
+            </div>
+            <div class="form_inner">
+                <div class="OK_img"><img class="OK" src="assets/images/OK.png" alt="gov" /></div>
+                <div class="text_inner">
+                    Ответим втечение<br />
+                    15 минут, в рабочее<br />
+                    время
+                </div>
+                <div class="OK_img"><img class="OK" src="assets/images/OK.png" alt="gov" /></div>
+                <div class="text_inner">
+                    Бережем ваши<br />
+                    персональные<br />
+                    данные
+                </div>
+            </div>
+            <div class="phone_form">+7 (342) 250-08-88</div>
+        </div>
+        <div class="form_left_block">
+            <div class="subscription_inner">
+                <form class="subscription_form" title="/people">
+                    <div class="subscription_block">
+                        <label class="subscription_label">Контактное лицо</label>
+                        <input class="subscription_input" placeholder="ФИО" />
+                    </div>
+                    <div class="subscription_block_two">
+                        <label class="subscription_label_two">Телефон</label>
+                        <label class="subscription_label_two">Email</label>
+                    </div>
+                    <div class="subscription_block_two">
+                        <input class="subscription_input_two" placeholder="+ 7 999 199 19 19" />
+                        <input class="subscription_input_two" placeholder="info@mail.ru" oninput="validateEmail(this)">
+                    </div>
+                    <div class="subscription_block_tree">
+                        <label class="subscription_label_tree">Причина обращения</label>
+                        <div class="dropdown">
+                            <input class="subscription_input" type="text" placeholder="Выберите опцию" onclick="toggleDropdown()">
+                            <ul id="dropdown-list">
+                                <li>Опция 1</li>
+                                <li>Опция 2</li>
+                                <li>Опция 3</li>
+                            </ul>
+                            <div class="arrowssub_img"><img class="arrowssub" src="assets/images/arrowssub.png" alt="gov" /></div>
+                        </div>
+                    </div>
+                    <div class="subscription_block">
+                        <label class="subscription_label">Комментарий</label>
+                        <textarea class="text_area" rows="6" cols="50" placeholder=" Напишите суть вашего вопроса"></textarea>
+                        <div id="touchArea">Коснитесь меня</div>
+                    </div>
+                    <div class="checkbox_block">
+                        <input class="checkbox" type="checkbox" id="myCheckbox">
+                        <label class="label_check" for="myCheckbox">Нажимая кнопку я соглашаюсь с политикой конфиденциальности</label>
+                    </div>
+                    <div class="button_submission"><button class="sub_button">Связаться с нами</button></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer_logo">
+            <div class="logo"><img src="assets/images/Logo.png" alt="Логотип"></div>
+            <div class="logotext">
+                Современное предприятие по <br />
+                производству гнуто-клееных изделий <br />
+                (латофлекс), фанеры, топливных брикетов <br />
+                RUF, березового угля, пиломатериалов
+            </div>
+            <div class="footer_text">
+                © 2022 ГремДок, все права защищены
+            </div>
+        </div>
+        <div class="realiz">
+            <div class="footer_grow_text">Реализация</div>
+            <div class="footer_normal_text">Латофлекс</div>
+            <div class="footer_normal_text">Фанера</div>
+            <div class="footer_normal_text">Брикеты топливные RUF</div>
+            <div class="footer_normal_text">Пиломатериалы</div>
+            <div class="footer_normal_text">Кроватные основания</div>
+            <div class="footer_normal_text">Уголь</div>
+            <div class="footer_normal_text">Саженцы</div>
+            <div class="footer_normal_text">Отходы производства</div>
+            <div class="footer_text_two">
+                Политика конфиденциальности
+            </div>
+        </div>
+        <div class="company">
+            <div class="footer_grow_text">О компании</div>
+            <div class="footer_normal_text">Продукция</div>
+            <div class="footer_normal_text">Деятельность</div>
+            <div class="footer_normal_text">Приемущества</div>
+            <div class="footer_normal_text">Вакансии</div>
+            <div class="footer_normal_text">Новости</div>
+        </div>
+        <div class="saler">
+            <div class="footer_grow_text">Отдел закупок</div>
+            <div class="footer_normal_text">+7 (342) 502-16-91</div>
+            <div class="footer_normal_text">purchase@grdok.ru</div>
+            <div class="footer_grow_text_two">Отдел продаж</div>
+            <div class="footer_normal_text">+7 (495) 414-15-73</div>
+            <div class="footer_normal_text">sale@grdok.ru</div>
+            <div class="footer_normal_text">@gremdok_bot</div>
+            <div class="footer_normal_text">
+                Мелкий опт, «карандаши»,<br />
+                «пятаки» : +7 (342) 502-16-91
+            </div>
+        </div>
+        <div class="nembers">
+            <div class="footer_grow_text">Контакты</div>
+            <div class="footer_normal_text">+7 (342) 250-08-88</div>
+            <div class="footer_normal_text">info@grdok.ru</div>
+            <div class="footer_grow_text_two">Адрес</div>
+            <div class="footer_normal_text">
+                Гремячинск Пермский край<br />
+                618270 РФ, г. Гремячинск,<br />
+                ул. Коммунистическая, д.1
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

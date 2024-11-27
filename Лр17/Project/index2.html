@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>События сенсорных экранов</title>
+    <style>
+        body {
+            height: 100vh; /* Занимает всю высоту окна */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #4a90e2, #f06);
+            color: white;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="touchArea">Коснитесь или перемещайте палец здесь</div>
+
+    <script>
+    const touchArea = document.getElementById('touchArea');
+
+    touchArea.addEventListener('touchstart', function(event) {
+        console.log('Сенсорное нажатие!');
+        console.log('Координаты касания:', event.touches[0].clientX, event.touches[0].clientY);
+        touchArea.textContent = 'Нажатие!';
+    });
+
+    touchArea.addEventListener('touchmove', function(event) {
+        console.log('Сенсорное перемещение!');
+        console.log('Координаты перемещения:', event.touches[0].clientX, event.touches[0].clientY);
+        touchArea.textContent = 'Перемещение!';
+    });
+
+    touchArea.addEventListener('touchend', function(event) {
+        console.log('Сенсорное окончание!');
+        touchArea.textContent = 'Окончание!';
+    });
+
+    touchArea.addEventListener('touchcancel', function(event) {
+        console.log('Сенсорное касание отменено!');
+        touchArea.textContent = 'Отменено!';
+    });
+        document.addEventListener('keydown', function (event) {
+            // Проверяем, что нажаты клавиши Shift и S
+            if (event.shiftKey && (event.key === 's' || event.key === 'S')) {
+                event.preventDefault(); // Останавливаем стандартное поведение
+
+                // Выполняем действие — показываем сообщение
+                alert('Комбинация Shift + S нажата!');
+            }
+        });
+    </script>
+
+</body>
+</html>
