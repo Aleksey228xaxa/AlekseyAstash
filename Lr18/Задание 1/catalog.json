@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Protein Whey",
+    "description": "High-quality whey protein for muscle mass gain.",
+    "price": 2000,
+    "quantity": 50
+  },
+  {
+    "id": 2,
+    "name": "BCAA 2:1:1",
+    "description": "Amino acid complex to support post-workout recovery.",
+    "price": 1500,
+    "quantity": 100
+  },
+  {
+    "id": 3,
+    "name": "Creatine Monohydrate",
+    "description": "Creatine for increasing strength and endurance.",
+    "price": 1200,
+    "quantity": 75
+  },
+  {
+    "id": 4,
+    "name": "Multivitamins",
+    "description": "Vitamin and mineral complex to support health.",
+    "price": 800,
+    "quantity": 200
+  },
+  {
+    "id": 5,
+    "name": "Pre-Workout Complex",
+    "description": "Powerful pre-workout complex to increase energy and focus.",
+    "price": 1800,
+    "quantity": 60
+  },
+  {
+    "id": 6,
+    "name": "Mass Gainer",
+    "description": "High-calorie mass gainer for weight gain.",
+    "price": 2500,
+    "quantity": 40
+  },
+  {
+    "id": 7,
+    "name": "L-Carnitine",
+    "description": "Product for fat burning and improving energy metabolism.",
+    "price": 1000,
+    "quantity": 90
+  },
+  {
+    "id": 8,
+    "name": "Omega-3",
+    "description": "Fatty acid complex for heart and joint health.",
+    "price": 900,
+    "quantity": 120
+  },
+  {
+    "id": 9,
+    "name": "Glutamine",
+    "description": "Amino acid for supporting recovery and immunity.",
+    "price": 1300,
+    "quantity": 85
+  },
+  {
+    "id": 10,
+    "name": "Casein Protein",
+    "description": "Slow-digesting protein to nourish muscles during sleep.",
+    "price": 2200,
+    "quantity": 30
+  }
+]

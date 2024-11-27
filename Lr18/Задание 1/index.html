@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин спортивного питания</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form, .catalog, .cart {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, select, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+            input[type="checkbox"], input[type="radio"] {
+                width: auto;
+                margin-right: 10px;
+            }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        .catalog-item, .cart-item {
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+
+            .cart-item span {
+                font-weight: bold;
+            }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .cart-item:last-child, .catalog-item:last-child {
+            border-bottom: none;
+        }
+
+        #output, #orderOutput, #cart-total {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Первая форма -->
+    <form id="userForm" onsubmit="return validateForm()">
+        <h2>Пример формы с валидацией</h2>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required pattern="[A-Za-zА-Яа-яЁё]+" title="Имя должно содержать только буквы">
+        <span class="error" id="nameError"></span>
+
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" name="age" min="18" max="100" required>
+        <span class="error" id="ageError"></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="emailError"></span>
+
+        <label for="subscribe">Подписаться на новости:</label>
+        <input type="checkbox" id="subscribe" name="subscribe">
+
+        <label>Пол:</label>
+        <div class="radio-group">
+            <label for="male">Мужской</label>
+            <input type="radio" id="male" name="gender" value="Мужской">
+        </div>
+        <div class="radio-group">
+            <label for="female">Женский</label>
+            <input type="radio" id="female" name="gender" value="Женский">
+        </div>
+
+        <label for="country">Страна:</label>
+        <select id="country" name="country">
+            <option value="Беларусь">Беларусь</option>
+            <option value="США">США</option>
+            <option value="Китай">Китай</option>
+        </select>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    <div id="output"></div>
+
+    <!-- Вторая форма для заказа спортивного питания -->
+    <form id="orderForm" onsubmit="return validateOrderForm()">
+        <h2>Форма заказа спортивного питания</h2>
+        <label for="productName">Название продукта:</label>
+        <input type="text" id="productName" name="productName" required>
+        <span class="error" id="productError"></span>
+
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+        <span class="error" id="quantityError"></span>
+
+        <label for="deliveryMethod">Способ доставки:</label>
+        <select id="deliveryMethod" name="deliveryMethod" required>
+            <option value="курьер">Курьер</option>
+            <option value="почта">Почта</option>
+            <option value="самовывоз">Самовывоз</option>
+        </select>
+
+        <label for="comments">Комментарии к заказу:</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+
+        <button type="submit">Оформить заказ</button>
+    </form>
+
+    <div id="orderOutput"></div>
+
+    <!-- Каталог товаров -->
+    <div class="catalog">
+        <h2>Каталог товаров</h2>
+        <div id="catalog-items"></div>
+    </div>
+
+    <!-- Корзина -->
+    <div class="cart">
+        <h2>Корзина</h2>
+        <div id="cart-items"></div>
+        <p id="cart-total"></p>
+        <button id="checkout">Оформить заказ</button>
+    </div>
+
+    <script>
+        let catalog = [];
+        let cart = [];
+
+        // Загрузка каталога из JSON-файла
+        fetch('catalog.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка загрузки каталога: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                catalog = data;
+                displayCatalog();
+            })
+            .catch(error => console.error(error));
+
+        // Функция для отображения товаров каталога
+        function displayCatalog() {
+            const catalogContainer = document.getElementById('catalog-items');
+            catalogContainer.innerHTML = '';
+
+            catalog.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'catalog-item';
+                itemElement.innerHTML = `
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <p>Цена: ${item.price} руб.</p>
+                        <button onclick="addToCart(${item.id})">Добавить в корзину</button>
+                    `;
+                catalogContainer.appendChild(itemElement);
+            });
+        }
+
+        // Функция для добавления товара в корзину
+        function addToCart(id) {
+            const product = catalog.find(item => item.id === id);
+            const cartItem = cart.find(item => item.id === id);
+
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            displayCart();
+        }
+
+        // Функция для отображения товаров в корзине
+        function displayCart() {
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                        <p><span>${item.name}</span> - ${item.quantity} шт. - ${item.price * item.quantity} руб.</p>
+                    `;
+                cartContainer.appendChild(itemElement);
+            });
+
+            const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            document.getElementById('cart-total').innerText = `Итого: ${totalPrice} руб.`;
+        }
+
+        // Оформление заказа (очистка корзины)
+        document.getElementById('checkout').addEventListener('click', function () {
+            if (cart.length === 0) {
+                alert('Корзина пуста!');
+                return;
+            }
+
+            alert('Заказ успешно оформлен!');
+            cart = [];
+            displayCart();
+        });
+
+        // Валидация первой формы
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const email = document.getElementById('email').value;
+
+            let valid = true;
+
+            document.getElementById('nameError').innerText = '';
+            document.getElementById('ageError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+
+            const nameRegex = /^[A-Za-zА-Яа-яЁё]+$/;
+            if (!nameRegex.test(name)) {
+                document.getElementById('nameError').innerText = 'Имя может содержать только буквы';
+                valid = false;
+            }
+
+            if (age < 18 || age > 100) {
+                document.getElementById('ageError').innerText = 'Возраст должен быть от 18 до 100 лет';
+                valid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').innerText = 'Введите корректный email';
+                valid = false;
+            }
+
+            if (valid) {
+                getData();
+            }
+
+            return valid;
+        }
+
+        // Валидация второй формы
+        function validateOrderForm() {
+            const productName = document.getElementById('productName').value;
+            const quantity = document.getElementById('quantity').value;
+
+            let valid = true;
+
+            document.getElementById('productError').innerText = '';
+            document.getElementById('quantityError').innerText = '';
+
+            if (!productName.trim()) {
+                document.getElementById('productError').innerText = 'Введите название продукта';
+                valid = false;
+            }
+
+            if (quantity <= 0) {
+                document.getElementById('quantityError').innerText = 'Количество должно быть больше 0';
+                valid = false;
+            }
+
+            if (valid) {
+                getOrderData();
+            }
+
+            return valid;
+        }
+
+        // Функция для первой формы
+        function getData() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const email = document.getElementById('email').value;
+            const subscribe = document.getElementById('subscribe').checked;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const country = document.getElementById('country').value;
+
+            const output = `
+                    Имя: ${name} <br>
+                    Возраст: ${age} <br>
+                    Email: ${email} <br>
+                    Подписка: ${subscribe ? 'Да' : 'Нет'} <br>
+                    Пол: ${gender ? gender : 'Не указан'} <br>
+                    Страна: ${country}
+                `;
+
+            document.getElementById('output').innerHTML = output;
+        }
+
+        // Функция для второй формы
+        function getOrderData() {
+            const productName = document.getElementById('productName').value;
+            const quantity = document.getElementById('quantity').value;
+            const deliveryMethod = document.getElementById('deliveryMethod').value;
+            const comments = document.getElementById('comments').value;
+
+            const orderOutput = `
+                    Продукт: ${productName} <br>
+                    Количество: ${quantity} <br>
+                    Способ доставки: ${deliveryMethod} <br>
+                    Комментарии: ${comments ? comments : 'Нет комментариев'}
+                `;
+
+            document.getElementById('orderOutput').innerHTML = orderOutput;
+        }
+    </script>
+</body>
+</html>
