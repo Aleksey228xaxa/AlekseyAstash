@@ -1,0 +1,368 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+/*Header*/
+
+.Navigation {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    vertical-align: top;
+}
+
+.header_inner {
+    display: flex;
+    justify-content: space-between;
+    background-color: #696969;
+    height: 11%;
+}
+
+.header_logo {
+    font-weight: bold;
+    font-size: 40px;
+    margin-left: 20px;
+    margin-top: 6px;
+}
+
+.header_logo_one {
+    color: #FFFFFF;
+}
+
+.header_logo_two {
+    color: #000000;
+}
+.nav_link {
+    display: inline-block;
+    vertical-align: top;
+    margin: 30px 10px 30px 40px;
+    color: #FFFFFF;
+    text-decoration: none;
+    position: relative;
+}
+
+.button {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 50px;
+    border: 2px solid #000;
+    border-radius: 20PX;
+    margin: 20px 5px 10px 20px;
+    color: #000;
+    background-color: #ffff;
+    text-decoration: none;
+}
+/*container*/
+.container {
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    background: url("../images/images.jpg") center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-start;
+}
+.Block_image {
+    margin-left: 150px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+.logo {
+    border: 5px solid black;
+}
+.image{
+    width:10%;
+    height:10%;
+}
+.Block_Text {
+    margin-left: 50px;
+    margin-top: 100px;
+    font-family: 'Times New Roman';
+    font-size:14px;
+    width:80%;
+}
+.audio {
+    margin-top: 10px;
+}
+.Label_image{
+    margin-top: 10px;
+    font-family: 'Times New Roman';
+    font-size:20px;
+}
+.Vvod {
+    margin-top: 10px;
+    font-family: 'Times New Roman';
+    font-size: 16px;
+}
+.Label_Vvod {
+    font-family: 'Times New Roman';
+    font-size: 16px;
+    margin-top: 10px;
+}
+.Table {
+    margin-top: 10px;
+    font-family: 'Times New Roman';
+    font-size: 16px;
+}
+.spisok {
+    margin-top: 10px;
+    font-family: 'Times New Roman';
+    font-size: 16px;
+}
+.block {
+    border: 4px solid #000000;
+}
+/*Registration*/
+.subscription_section {
+    width: 100%;
+    height: 100vh;
+    background-color: #D3D3D3;
+}
+
+.subscription_section_inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subscription_image {
+    width: 40%;
+    margin-top: 25px;
+}
+
+.image1 {
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.image2 {
+    margin-top: -40px;
+    margin-left: 180px;
+}
+.images1 {
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #000;
+    font-family: sans-serif;
+}
+
+.images2 {
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #000;
+    font-family: sans-serif;
+}
+
+.subscription_inner {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscription_form {
+    margin-top:80px;
+    width: 50%;
+    height: 80%;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #000;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 10%;
+}
+
+.subscription_title {
+    margin-top: 60px;
+    margin: 0 0 32px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #000;
+    text-align: center;
+    height: 20%;
+}
+
+.subscription_block {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.subscription_input {
+    margin-left: 10%;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    width: 80%;
+    padding: 10px 0 10px 0;
+    border: 3px solid #000;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+}
+
+    .subscription_input:focus ~ .subscription_label,
+    .subscription_input:not(:placeholder-shown) ~ .subscription_label {
+        color: #FFC1D8;
+    }
+
+.subscription_label {
+    margin-left: 40px;
+    z-index: -1;
+    font-weight: bold;
+    color: #000;
+    transition: 0.3s;
+}
+
+.subscription_input:focus {
+    border: 4px solid #696969;
+}
+.sub_button {
+    padding: 10px 80px;
+    border: 3px solid #000;
+    border-radius: 30px;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #D3D3D3;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+    .sub_button:focus,
+    .sub_button:hover {
+        background-color: #696969
+    }
+/*Test*/
+.Test {
+    margin: 0 auto;
+    height: 100%;
+    background: url("../images/images.jpg") center no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding-bottom:40px;
+}
+.Test_text{
+    font-weight: bold;
+    font-size:20px;
+    margin-left:50px;
+}
+.submit {
+    padding: 5px 40px;
+    border: 2px solid #000;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #D3D3D3;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.submit:focus,
+.submit:hover {
+    background-color: #696969
+}
+.Test_text_title {
+    margin-left: 600px;
+}
+.options{
+    margin-left: 30px;
+}
+.video-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #D3D3D3;
+}
+
+.video-container {
+    max-width: 400px;
+    border: 2px solid #000;
+    box-shadow: 0 4px 16px #000;
+    margin-right:20px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.video-description {
+    text-align: center;
+    margin-top: 20px;
+
+}
+/*Footer*/
+.footer {
+    width: 100%;
+    height: 100%;
+    background-color: #0B0D17;
+}
+
+.footer_inner {
+}
+
+.footer_body {
+    display: flex;
+}
+
+.footer_info {
+    font-size: 18px;
+    margin-top:30px;
+    margin-left:30px;
+    color: #D3D3D3;
+}
+
+.footer_social {
+    font-size: 18px;
+    text-align: center;
+    color: #D3D3D3;
+}
+
+.social {
+    font-size: 18px;
+    margin-left: 18%;
+    margin-top: 28%;
+    text-align: center;
+    color: #D3D3D3;
+}
+
+.block_icon {
+    display: flex;
+}
+
+.footer_icon {
+    margin: 3%;
+}
+
+.footer_end {
+    margin-top: 3%;
+    text-align: center;
+    color: #D3D3D3;
+}
